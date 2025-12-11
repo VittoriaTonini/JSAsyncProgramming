@@ -1,0 +1,43 @@
+{
+    "nome": "3C",
+    "scuola": "Scuola Elementare Miao",
+    "numAlunni": 21,
+    "scuolaSabato": false,
+    "insegnanti": [
+        {
+            "nome": "Sara",
+            "cognome": "Verdi",
+            "materie": [
+                "Italiano",
+                "Storia",
+                "Geografia"
+            ]
+        },
+        {
+            "nome": "Mario",
+            "cognome": "Rossi",
+            "materie": [
+                "Matematica",
+                "Scienze"
+            ]
+        }
+    ],
+    "alunni": [
+        {
+            "nome": "Viola",
+            "cognome": "Ciao"
+        },
+        {
+            "nome": "Matteo",
+            "cognome": "Ueue"
+        },
+        {
+            "nome": "Anna",
+            "cognome": "Hola"
+        }
+    ],
+    "orari":{
+        "mattina": ["Storia", "Scienze"],
+        "pomeriggio": ["Matematica", "Italiano"]
+    }
+}

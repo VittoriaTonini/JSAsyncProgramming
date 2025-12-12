@@ -25,3 +25,13 @@ function displayImage(blob) {
 }
 
 loadAsset("https://images.unsplash.com/photo-1486944859394-ed1c44255713?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 'blob', displayImage);
+
+//metodo nuovo: fecth e promise
+fetch("classe.json").then(function (response){ //fetch restituisce una promise che viene risolta con l'oggetto response
+    return response.json(); //ciò che ritorno diventa il parametro del secondo then
+}).then(function (json){
+    classe = json;
+    console.log("Classe: ", classe)
+}).catch(function (err){
+    console.log("Fetch problem: " + err.message);
+});

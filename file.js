@@ -5,33 +5,58 @@
 
 //esempio con le callback (modo vecchio)
 //una callback è una funzione che noi chiamiamo quando abbiamo finito di fare determinate cose
-function loadAsset(url, type, callback){
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url);
-    xhr.responseType = type;
+function loadAsset(url, type, callback) {
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', url);
+  xhr.responseType = type;
 
-    xhr.onload = function (){
-        callback(xhr.response); //prendi la risposta che ti è arrivata e la butti nella funzione di callback (che sarà displayImage in questo caso)
-    }
+  xhr.onload = function () {
+    callback(xhr.response); //prendi la risposta che ti è arrivata e la butti nella funzione di callback (che sarà displayImage in questo caso)
+  }
 
-    xhr.send();
+  xhr.send();
 }
 
-function displayImage(blob) { 
-    let objectURL = URL.createObjectURL(blob); //crea un URL temporaneo a partire dal blob: blob è il risultato di xhr.response
-    let image = document.createElement("img"); //crea un nuovo elemento <img>
-    image.src = objectURL; //imposta l'URL temporaneo come sorgente dell'immagine
-    document.body.appendChild(image); //aggiunge l'immagine al body della pagina
+function displayImage(blob) {
+  let objectURL = URL.createObjectURL(blob); //crea un URL temporaneo a partire dal blob: blob è il risultato di xhr.response
+  let image = document.createElement("img"); //crea un nuovo elemento <img>
+  image.src = objectURL; //imposta l'URL temporaneo come sorgente dell'immagine
+  document.body.appendChild(image); //aggiunge l'immagine al body della pagina
 }
 
 loadAsset("https://images.unsplash.com/photo-1486944859394-ed1c44255713?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 'blob', displayImage);
 
 //metodo nuovo: fecth e promise
-fetch("classe.json").then(function (response){ //fetch restituisce una promise che viene risolta con l'oggetto response
-    return response.json(); //ciò che ritorno diventa il parametro del secondo then
-}).then(function (json){
-    classe = json;
-    console.log("Classe: ", classe)
-}).catch(function (err){
-    console.log("Fetch problem: " + err.message);
+fetch("classe.json").then(function (response) { //fetch restituisce una promise che viene risolta con l'oggetto response
+  return response.json(); //ciò che ritorno diventa il parametro del secondo then
+}).then(function (json) {
+  classe = json;
+  console.log("Classe: ", classe)
+}).catch(function (err) {
+  console.log("Fetch problem: " + err.message);
 });
+
+//setTimeout(funzione, tempo di attesa) e clearTimeout()
+let prova = setTimeout(saluta, 5000); //la funzione saluta viene eseguita dopo 5 secondi
+const btn = document.querySelector("button");
+
+function saluta() {
+  alert("ciao sono in timeout");
+}
+
+btn.addEventListener("click", () => { //se clicco il bottone blocchiamo l'evento
+  clearTimeout(prova);
+})
+
+//setInterval() e clearInterval()
+function displayTime() {
+  let date = new Date(); 
+  let time = date.toLocaleTimeString();
+  document.getElementById("demo").textContent = time;
+}
+
+const createClock = setInterval(displayTime, 1000); //ogni secondo viene eseguita la funzione displayTime
+
+btn.addEventListener("click", () => { 
+  clearTimeout(createClock);
+})
